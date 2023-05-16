@@ -1,11 +1,40 @@
 # my Python cheatsheet
 
-## Lists
+## Basics
+
+### Lists
 
 List comprehension:
 
 ```
 [len(i) for i in mylist]
+```
+
+### Sets
+
+Create sets (unique, unordered):
+
+```
+a=set[1, 2, 3])
+b=set[2, 1, 6]
+```
+
+```
+# Intersection:
+a.intersection(b)
+a & b
+
+# Union:
+a.union(b)
+a | b
+
+# Difference:
+a.difference(b)
+a - b
+
+# Symmetric Difference (elements from both sets that are not present on the other):
+a.symmetric_difference(b)
+a ^ b
 ```
 
 ## Jupyter notebook
