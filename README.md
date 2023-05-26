@@ -10,6 +10,17 @@ List comprehension:
 [len(i) for i in mylist]
 ```
 
+Search pattern in a list:
+
+```
+# search in list of strings
+[i for i in mylist if 'ENSG' in i]
+
+# here, search in AnnData.var index
+[i for i in concatenatedData.var.index.tolist() if i.startswith('ENSG')]
+[i for i in concatenatedData.var.index.tolist() if i.endswith('ENSG')]
+```
+
 ### Sets
 
 Create sets (unique, unordered):
