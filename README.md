@@ -134,6 +134,12 @@ sp.sparse.csr_matrix.todense(counts)
 
 ## pandas
 
+Order pandas data frame using another list:
+
+```
+df['A'] = pd.Categorical(df['A'], ordered=True, categories=list_order)
+df = df.sort_values('A')
+```
 
 ## scanpy
 
