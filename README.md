@@ -21,6 +21,12 @@ Search pattern in a list:
 [i for i in concatenatedData.var.index.tolist() if i.endswith('ENSG')]
 ```
 
+Convert list of bytes to strings:
+
+```
+[i.decode("utf-8") for i in mylist]
+```
+
 ### Sets
 
 Create sets (unique, unordered):
