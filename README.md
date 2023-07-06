@@ -147,6 +147,13 @@ df['A'] = pd.Categorical(df['A'], ordered=True, categories=list_order)
 df = df.sort_values('A')
 ```
 
+Add prefix to column names:
+
+```
+df=pd.DataFrame({'A': [1, 2, 3, 4], 'B': [3, 4, 5, 6]})
+df.add_prefix('col_')
+```
+
 ## scanpy
 
 Multiple UMAPs + figure size control:
