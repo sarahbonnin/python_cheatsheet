@@ -176,3 +176,11 @@ with h5py.File(out_h5, "r") as check:
     h5_barcodes = list(check['barcodes'])
 ```
 
+## Conversion of R / Seurat object into anndata / h5ad
+
+```
+library(sceasy)
+obj <- readRDS("/domino/datasets/local/Macrophage_atlas/sbonnin/AMP_SLE_Phase2/LN_sc_processed_harmony.RDS")
+sceasy::convertFormat(seurat_object, from="seurat", to="anndata",
+                       outFile='out.h5ad')
+```
