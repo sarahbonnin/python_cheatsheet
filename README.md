@@ -164,6 +164,13 @@ with rc_context({'figure.figsize': (8, 6)}):
            color=['Variable1', 'Variable2'],
           s=20, ncols=2, wspace=0.3)
 ```
+Save figures:
+
+```
+sc.settings.figdir = os.path.join("dir_figures")
+
+
+```
 
 ## h5py
 
@@ -176,11 +183,75 @@ with h5py.File(out_h5, "r") as check:
     h5_barcodes = list(check['barcodes'])
 ```
 
+## matplotlib
+
+```
+from matplotlib_venn import venn2, venn3
+import matplotlib.pyplot as plt
+```
+
+### Figure control
+
+```
+plt.rcParams['figure.figsize'] = [12, 12]
+```
+### Barplots
+
+```
+mydf_counts=mydf.value_counts()
+cluster = list(mydf_counts.keys())
+cells = list(mydf_counts)
+      
+fig = plt.figure(figsize = (10, 5))
+     
+# creating the bar plot
+plt.bar(cluster, cells, color ='maroon', width = 0.4)
+     
+plt.xlabel("Cluster name")
+plt.ylabel("Number of cells")
+plt.xticks(rotation=90)
+plt.title("title")
+plt.savefig("barplot.png)
+plt.show()
+```
+
+### Venn diagrams
+
+Example of a 3-way Venn
+
+```
+venn3(subsets=[set(list1), set(list2), set(list3)],
+     set_labels=("list 1", "list 2", "list 3"))
+
+plt.savefig('Venn3.png')
+```
+
 ## Conversion of R / Seurat object into anndata / h5ad
 
 ```
 library(sceasy)
-obj <- readRDS("/domino/datasets/local/Macrophage_atlas/sbonnin/AMP_SLE_Phase2/LN_sc_processed_harmony.RDS")
+obj <- readRDS("in_seurat.rds")
 sceasy::convertFormat(seurat_object, from="seurat", to="anndata",
-                       outFile='out.h5ad')
+                       outFile='out_anndata.h5ad')
+```
+
+Sometimes, using a "SingleCellExperiment" intermediate object can help with the conversion:
+
+```
+rds1 <- "in_seurat.rds"
+sce1 <- "out_sce.rds"
+h5ad1 <- "out_anndata.h5ad"
+
+obj <- readRDS(rds1)
+
+# Seurat to SCE
+sceasy::convertFormat(obj, from="seurat", to="sce",
+                        outFile=sce1,
+                        assay="RNA",
+                        main_layer="counts")
+sce_in <- readRDS(sce1)
+
+# SCE to AnnData
+sceasy::convertFormat(sce_in, from="sce", to="anndata",
+                       outFile=h5ad1)
 ```
